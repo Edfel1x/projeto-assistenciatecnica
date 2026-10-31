@@ -4,17 +4,27 @@ clientes = []
 def cadastro_cliente():
     id_cliente = len(clientes) + 1
     while True:
-        nome = input("Digite o nome do cliente: ").strip()
-        if not nome:
-            print("O nome não pode ser vazio. Tente novamente.")
-            continue
-        break
+        try:
+            nome = input("Digite o nome do cliente: ").strip()
+            if not nome:
+                print("O nome não pode ser vazio. Tente novamente.")
+                continue
+            if not nome.replace(" ", "").isalpha():
+                raise ValueError("O nome deve conter somente letras.")
+            break
+        except ValueError:
+            print("Entrada inválida. Por favor, digite um nome válido.")
     while True:
-        telefone = input("Digite o telefone do cliente: ").strip()
-        if not telefone:
-            print("O telefone não pode ser vazio. Tente novamente.")
-            continue
-        break
+        try:
+            telefone = input("Digite o telefone do cliente: ").strip()
+            if not telefone:
+                print("O telefone não pode ser vazio. Tente novamente.")
+                continue
+            if not telefone.isascii() or not telefone.isdigit():
+                raise ValueError("O telefone deve conter somente números.")
+            break
+        except ValueError:
+            print("Entrada inválida. Por favor, digite um telefone válido.")
     email = input("Digite o email do cliente: ").strip()
 
     cliente = {
